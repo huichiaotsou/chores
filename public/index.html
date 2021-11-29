@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="./index.css">
+    </head>
+    <body>
+        <header>
+        </header>
+        <main>
+            <form method="POST" enctype="multipart/form-data" name="data">
+
+                <label for="name">我是誰：</label>
+                <select name="name" id="name" required>
+                    <option  selected disabled></option>
+                    <option value="Philippe">Philippe</option>
+                    <option value="Shanti">Shanti</option>
+                </select>
+
+                <div style="margin-top: 10px;">
+                    <input type="radio" id="today" name="dateAjustment" value="0" checked>
+                    <label for="today"> 今天 </label>
+
+                    <input type="radio" id="yesterday" name="dateAjustment" value="-1">
+                    <label for="yesterday"> 昨天 </label>
+
+                    <input type="radio" id="before_yesterday" name="dateAjustment" value="-2">
+                    <label for="before_yesterday"> 前天 </label>
+
+                </div>
+       
+
+                <div class="category">
+                    衣服類
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="washClothes" name="washClothes" value="洗衣服" style="width:15px;height:15px;">
+                    <label for="washClothes">洗衣服</label>
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="hangClothes" name="hangClothes" value="晾衣服" style="width:15px;height:15px;">
+                    <label for="hangClothes">晾衣服</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="collectClothes" name="collectClothes" value="收衣服" style="width:15px;height:15px;">
+                    <label for="collectClothes">收衣服</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="foldClothes" name="foldClothes" value="摺衣服" style="width:15px;height:15px;">
+                    <label for="foldClothes">摺衣服</label>          
+                </div>
+
+                <div class="category">
+                    一般家事類
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="washDishes" name="washDishes" value="洗碗" style="width:15px;height:15px;">
+                    <label for="washDishes">洗碗</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="mopFloor" name="mopFloor" value="漂白水擦地" style="width:15px;height:15px;">
+                    <label for="mopFloor">漂白水擦地</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="trash" name="trash" value="倒垃圾" style="width:15px;height:15px;">
+                    <label for="trash">倒垃圾</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="washBedSheet" name="washBedSheet" value="洗床單" style="width:15px;height:15px;">
+                    <label for="washBedSheet">洗床單</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="changeBedSheet" name="changeBedSheet" value="換床單" style="width:15px;height:15px;">
+                    <label for="changeBedSheet">換床單</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="tidyUp" name="tidyUp" value="整理家裡(桌面、房間)" style="width:15px;height:15px;">
+                    <label for="tidyUp">整理家裡(桌面、房間)</label>          
+                </div>
+
+                <div class="category">
+                    狗狗類
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="washDogs" name="washDogs" value="狗狗洗澡" style="width:15px;height:15px;">
+                    <label for="washDogs">狗狗洗澡</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="dogShit" name="dogShit" value="撿狗狗便便" style="width:15px;height:15px;">
+                    <label for="dogShit">撿狗狗便便</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="dogPee" name="dogPee" value="擦地板/擦狗狗尿尿" style="width:15px;height:15px;">
+                    <label for="dogPee">擦地板/擦狗狗尿尿</label>          
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="walkDog" name="walkDog" value="遛狗" style="width:15px;height:15px;">
+                    <label for="walkDog">遛狗</label>          
+                </div>
+
+                <div class="options">
+                    <label for="others">其他：</label>          
+                    <input type="text" id="others" name="others">
+                </div>
+
+                <input type="submit" id="submit" style="border-radius: 10px;">
+
+            </form>
+
+        </main>
+    </body>
+    <script src="./index.js"></script>
+
+</html>
