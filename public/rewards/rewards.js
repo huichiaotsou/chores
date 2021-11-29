@@ -9,6 +9,7 @@ const dateZH = document.getElementById("dateZH")
 const daysZH = document.getElementById("daysZH")
 const rewardsZH = document.getElementById("rewardsZH")
 
+const chores = document.getElementById("chores")
 
 
 const xhr = new XMLHttpRequest();
@@ -26,6 +27,13 @@ xhr.onreadystatechange = function () {
             dateZH.innerHTML = `到今天為止 (${res.date}),`
             daysZH.innerHTML = `已經連續做了 [ ${res.rewards.accumulated} 天 ] 的家事囉!`
             rewardsZH.innerHTML = `繼續努力唷！到今天已經累積了 [ ${res.rewards.rewards} 元 ] 的努力不懈獎勵金`
+
+            const records = res.todayRecords
+            if (records.length > 0) {
+                chores.innerHTML = `今天做的家事有：${res.todayRecords.join(", ")}`
+            } else {
+                chores.innerHTML = `今天還沒做家事唷！`
+            }
 
         }
     }

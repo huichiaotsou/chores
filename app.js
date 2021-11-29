@@ -54,14 +54,17 @@ app.post("/submit", upload.array(), async (req, res, next) => {
 app.get("/api/:name", async (req, res, next)=> {
     try {
         const {name} = req.params
-        const rewards = await utils.calculateRewards(name)
         const today = new Date()
+        const formatDate = today.getFullYear()+"-"+ parseInt(today.getMonth()+1) +"-"+ today.getDate()
+        const rewards = await utils.calculateRewards(name)
+        const todayRecords = await utils.getTodayRecords(name, formatDate)
     
         res.send(
             {
                 name, 
                 rewards,
-                date: today.getMonth()+1 +"/"+ today.getDate()
+                todayRecords,
+                date: formatDate
             })
     } catch (error) {
         console.log(error);

@@ -87,9 +87,25 @@ async function calculateRewards(name) {
     return {rewards, accumulated: accumulatedArray[accumulatedArray.length -1]}
 }
 
+async function getTodayRecords(name, formatDate) {
+    const [resultName] = await DB.query("SELECT id FROM names WHERE name = ?", name)
+    if (resultName == undefined) return 0
+
+    const result = await DB.query(
+        `SELECT chore FROM records 
+            JOIN chores ON chores.id = records.chore_id 
+            WHERE name_id = ? 
+            AND date = ?`, 
+        [resultName.id, formatDate]
+    )
+
+    return result.map(r => r.chore)
+}
+
 module.exports = {
     saveName,
     saveRecords,
     saveChores,
     calculateRewards,
+    getTodayRecords,
 }
