@@ -23,7 +23,7 @@ data.addEventListener('submit', (e)=> {
     const today = new Date();
     const formatDate = today.getFullYear()+"-"+ parseInt(today.getMonth()+1) +"-"+ today.getDate()
 
-    formData.append(date, formatDate)
+    formData.append("date", formatDate)
 
     xhr.send(formData);
 });
