@@ -13,7 +13,7 @@ const chores = document.getElementById("chores")
 
 
 const xhr = new XMLHttpRequest();
-xhr.open('GET', `/api/${urlPerson}`);
+xhr.open('GET', `/api/rewards/${urlPerson}`);
 xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
         if (xhr.status === 200) {
@@ -38,6 +38,5 @@ xhr.onreadystatechange = function () {
         }
     }
 };
-
 
 xhr.send();

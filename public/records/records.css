@@ -5,10 +5,16 @@ html {
 }
 
 body {
-    margin-top: 10%;
+    margin-top: 2%;
     margin-left: 15%;
 }
 
-div {
+.chores {
     margin-top: 5px;
+    margin-left: 10px;
+}
+
+.single_date {
+    display: flex;
+    align-items: center;
 }

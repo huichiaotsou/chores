@@ -1,12 +1,12 @@
 html {
     font-family: sans-serif;
-    font-size: larger;
+    font-size: x-large;
     letter-spacing: 1px;
 }
 
 select {
     width: 200px;
-    font-size: large;
+    font-size: x-large;
     margin-top: 20px;
 }
 
@@ -34,4 +34,15 @@ main{
     margin-top: 10px;
     width: 200px;
     height: 30px;
+}
+
+#records {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+.record_person{
+    margin-right: 40px;
+    color:chocolate;
 }

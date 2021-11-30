@@ -51,7 +51,7 @@ app.post("/submit", upload.array(), async (req, res, next) => {
 })
 
 
-app.get("/api/:name", async (req, res, next)=> {
+app.get("/api/rewards/:name", async (req, res, next)=> {
     try {
         const {name} = req.params
         const today = new Date()
@@ -75,3 +75,21 @@ app.get("/api/:name", async (req, res, next)=> {
 app.get('/rewards/:name', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/rewards/' + 'rewards.html'));
 });
+
+app.get('/records/:name', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/records/' + 'records.html'));
+});
+
+app.get("/api/records/:name", async (req, res, next)=> {
+    const {name} = req.params
+    const sortedRecords = await utils.getAllRecordsSorted(name)
+    const rewards = await utils.calculateRewards(name)
+
+    res.send(
+        {
+            sortedRecords,
+            rewards
+        }
+    )
+
+})

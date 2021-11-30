@@ -89,7 +89,7 @@ async function calculateRewards(name) {
 
 async function getTodayRecords(name, formatDate) {
     const [resultName] = await DB.query("SELECT id FROM names WHERE name = ?", name)
-    if (resultName == undefined) return 0
+    if (resultName == undefined) return []
 
     const result = await DB.query(
         `SELECT chore FROM records 
@@ -102,10 +102,52 @@ async function getTodayRecords(name, formatDate) {
     return result.map(r => r.chore)
 }
 
+async function getAllRecordsSorted(name) {
+    const [resultName] = await DB.query("SELECT id FROM names WHERE name = ?", name)
+    if (resultName == undefined) return []
+
+    const result = await DB.query(
+        `SELECT records.date, chores.chore FROM records 
+        JOIN names ON names.id = records.name_id 
+        JOIN chores ON chores.id = records.chore_id 
+        WHERE name_id = ? 
+        ORDER BY datetime DESC`, 
+        resultName.id,
+    )
+
+    const res = []
+
+    result.forEach(r => {
+        if (res.length == 0) {
+            res.push(
+                {
+                    date: r.date,
+                    chores: [r.chore],
+                }
+            )
+        } else {
+            let lastEl = res[res.length-1]
+            if(lastEl.date == r.date) {
+                lastEl.chores.push(r.chore)
+            } else {
+                res.push(
+                    {
+                        date: r.date,
+                        chores: [r.chore],
+                    }
+                )
+            }
+        }
+    })
+
+    return res
+}
+
 module.exports = {
     saveName,
     saveRecords,
     saveChores,
     calculateRewards,
     getTodayRecords,
+    getAllRecordsSorted
 }
