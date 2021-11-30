@@ -37,7 +37,7 @@ async function saveRecords(nameId, choreIds, date) {
     }
     //Delete existing results if already inserted
     const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-    await DB.query("DELETE FROM records WHERE date = ?", formatDate)
+    await DB.query("DELETE FROM records WHERE date = ? AND name_id = ?", [formatDate, nameId])
 
     const stmt = "INSERT INTO records (name_id, chore_id, date, datetime) VALUES ?"
     const sqlValues = []
