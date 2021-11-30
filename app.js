@@ -14,7 +14,7 @@ const path = require('path');
 
 app.post("/submit", upload.array(), async (req, res, next) => {
     try {
-        const { name, dateAjustment } = req.body
+        const { name, dateAjustment, formatDate} = req.body
     
         const {
             washClothes, hangClothes, collectClothes, foldClothes, washDishes,
@@ -32,7 +32,7 @@ app.post("/submit", upload.array(), async (req, res, next) => {
             chores.push(others)
         }
     
-        const today = new Date()
+        const today = new Date(formatDate)
         const adjustedDate = new Date(today.setDate(today.getDate() + parseInt(dateAjustment)))
         console.log("adjustedDate: ", adjustedDate);
     

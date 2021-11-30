@@ -21,9 +21,9 @@ data.addEventListener('submit', (e)=> {
     const formData = new FormData(data);
 
     const today = new Date();
-    const formatDate = today.getFullYear()+"-"+ parseInt(today.getMonth()+1) +"-"+ today.getDate()
+    const formatDate = today.getFullYear()+"-"+ parseInt(today.getMonth()+1) +"-"+ today.getDate() + " " + "12:00:00"
 
-    formData.append("date", formatDate)
+    formData.append("formatDate", formatDate)
 
     xhr.send(formData);
 });
