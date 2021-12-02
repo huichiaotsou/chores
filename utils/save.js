@@ -1,4 +1,5 @@
 const DB = require("./db")
+const utils = require("./utils")
 
 async function saveName(name) {
     const [row] = await DB.query("SELECT * FROM names WHERE name = ?", name)
@@ -52,15 +53,28 @@ async function calculateRewards(name) {
     const [resultName] = await DB.query("SELECT id FROM names WHERE name = ?", name)
     if (resultName == undefined) return 0
 
-    const result = await DB.query("SELECT datetime FROM records WHERE name_id = ? GROUP BY datetime ORDER BY datetime", resultName.id)
+    const nameId = resultName.id 
+
+    const result = await DB.query("SELECT datetime FROM records WHERE name_id = ? GROUP BY datetime ORDER BY datetime", nameId)
     const dates = result.map(r => r.datetime)
 
     const accumulatedArray = []
     let counter = 1
-    for(let i = 1 ; i < dates.length; i++) {
+    let rewards = 0
+    for(let i = 1 ; i < dates.length; i++) {        
         const dayDiff = Math.ceil((new Date(dates[i]).setHours(0, 0, 0) - new Date(dates[i - 1]).setHours(0, 0, 0)) / (1000 * 60 * 60 * 24))
         if (dayDiff == 1) {
             counter += 1
+            if (counter % 7 == 0) {
+                if (await utils.getChoreTimes(dates[i], nameId) >= 15) {
+                    rewards += 500
+                }
+            }
+            if (counter % 28 == 0 && eligible) {
+                if (await utils.getChoreTimes(dates[i], nameId) >= 15) {
+                    rewards += 1000
+                }
+            }
         } else if (dayDiff > 1) {
             accumulatedArray.push(counter)
             counter = 1
@@ -70,21 +84,11 @@ async function calculateRewards(name) {
     accumulatedArray.push(counter)
     
 
-    console.log("accumulatedArray: ", accumulatedArray);
-
-    let rewards = 0;
-    accumulatedArray.forEach(a => {
-        for (i = 1; i <= a; i++) {
-            if (i % 7 == 0) {
-                rewards += 500
-            }
-            if (i % 28 == 0) {
-                rewards += 1000
-            }
-        }
-    })
-
-    return {rewards, accumulated: accumulatedArray[accumulatedArray.length -1]}
+    return {
+        rewards, 
+        accumulated: accumulatedArray[accumulatedArray.length -1],
+        accumulatedTimes: await utils.getChoreTimes(new Date(), nameId),
+    }
 }
 
 async function getTodayRecords(name, formatDate) {
