@@ -70,7 +70,7 @@ async function calculateRewards(name) {
                     rewards += 500
                 }
             }
-            if (counter % 28 == 0 && eligible) {
+            if (counter % 28 == 0) {
                 if (await utils.getChoreTimes(dates[i], nameId) >= 15) {
                     rewards += 1000
                 }
