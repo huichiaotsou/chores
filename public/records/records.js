@@ -16,6 +16,10 @@ xhr.onreadystatechange = function () {
             consecutiveDaysDiv.innerHTML = urlPerson + " 目前累積連續天數："+ rewards.accumulated + " 天"
             rewardsDiv.appendChild(consecutiveDaysDiv)
 
+            const accuTimesDiv = document.createElement("div")
+            accuTimesDiv.innerHTML = " 過去 7 天累積做家事項目："+ rewards.accumulatedTimes + " 次"
+            rewardsDiv.appendChild(accuTimesDiv)
+
             const CurrentRewardsDiv = document.createElement("div")
             CurrentRewardsDiv.innerHTML = "累積的努力不懈獎勵金："+ rewards.rewards + "元"
             rewardsDiv.appendChild(CurrentRewardsDiv)

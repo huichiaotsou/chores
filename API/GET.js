@@ -34,6 +34,8 @@ const getRecords = async (req, res, next)=> {
     const sortedRecords = await utils.getAllRecordsSorted(name)
     const rewards = await utils.calculateRewards(name)
 
+    console.log(rewards);
+
     res.send(
         {
             sortedRecords,
