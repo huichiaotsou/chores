@@ -35,11 +35,11 @@ const submit = async (req, res, next) => {
         const nameId = await utils.saveName(name)
         const choreIds = await utils.saveChores(chores)
         await utils.saveRecords(nameId, choreIds, adjustedDate)
-    
+        
         console.log("name id: ", nameId);
         console.log("chore id: ", choreIds);
-
-        await utils.saveRewards(name, adjustedDate)
+        
+        await utils.saveRewards(name, new Date(formatDate))
     
         res.sendStatus(200)
     } catch (error) {

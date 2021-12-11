@@ -51,9 +51,10 @@ async function saveRecords(nameId, choreIds, date) {
 
 async function saveRewards(name, date) {
     const rewards = await calculateRewards(name)
-    const stmt = "INSERT IGNORE INTO rewards (name_id, rewards, date) VALUES ? "
-    const vals = [rewards.nameId, rewards.rewards, date]
-    await DB.query(stmt, vals)
+    const stmt = "INSERT IGNORE INTO rewards (name_id, rewards, date) VALUES (? , ? , ?) "
+    console.log("-----------");
+    console.log([rewards.nameId, rewards.rewards, date]);
+    await DB.query(stmt, [rewards.nameId, rewards.rewards, date])
 }
 
 async function calculateRewards(name) {
