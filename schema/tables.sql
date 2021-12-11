@@ -35,5 +35,6 @@ CREATE TABLE rewards (
     rewards     INT,
     date        TIMESTAMP,
 
-    FOREIGN KEY (name_id) REFERENCES names(id)
+    FOREIGN KEY (name_id) REFERENCES names(id),
+    CONSTRAINT person_reward_key UNIQUE (name_id, rewards)
 );
