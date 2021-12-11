@@ -7,17 +7,25 @@ const submit = async (req, res, next) => {
         const {
             washClothes, hangClothes, collectClothes, foldClothes, washDishes,
             mopFloor, trash, washBedSheet, changeBedSheet, tidyUp,
-            washDogs, dogShit, dogPee, walkDog, others
+            washDogs, dogShit, dogPee, walkDog, other1, other2, other3,
         } = req.body
     
         const chores = [ 
-            washClothes, hangClothes, collectClothes, foldClothes, washDishes, 
-            mopFloor, trash, washBedSheet, changeBedSheet, tidyUp, 
+            washClothes, hangClothes, collectClothes, foldClothes, washDishes,
+            mopFloor, trash, washBedSheet, changeBedSheet, tidyUp, 
             washDogs, dogShit, dogPee, walkDog
         ]
 
-        if (others.length != 0) {
-            chores.push(others)
+        if (other1.length != 0) {
+            chores.push(other1)
+        }
+
+        if (other2.length != 0) {
+            chores.push(other2)
+        }
+
+        if (other3.length != 0) {
+            chores.push(other3)
         }
     
         const today = new Date(formatDate)
@@ -30,11 +38,12 @@ const submit = async (req, res, next) => {
     
         console.log("name id: ", nameId);
         console.log("chore id: ", choreIds);
+
+        await utils.saveRewards(name, adjustedDate)
     
         res.sendStatus(200)
     } catch (error) {
         console.log(error);
-        res.sendStatus(500)
     }
 }
 

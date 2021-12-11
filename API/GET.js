@@ -9,7 +9,12 @@ const getRewards = async (req, res, next)=> {
         const rewards = await utils.calculateRewards(name)
         const todayRecords = await utils.getTodayRecords(name, formatDate)
 
-        console.log(rewards);
+        console.log({
+            name, 
+            rewards,
+            todayRecords,
+            date: formatDate
+        });
     
         res.send(
             {

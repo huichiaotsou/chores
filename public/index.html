@@ -10,11 +10,12 @@
         <main>
             <form method="POST" enctype="multipart/form-data" name="data">
 
-                <label for="name">我是誰：</label>
+                <label for="name">我是誰:</label>
                 <select name="name" id="name" required>
                     <option  selected disabled></option>
                     <option value="Philippe">Philippe</option>
                     <option value="Shanti">Shanti</option>
+                    <option value="Test">Test</option>
                 </select>
 
                 <div style="margin-top: 10px;">
@@ -99,15 +100,25 @@
                 </div>
 
                 <div class="options">
-                    <label for="others">其他：</label>          
-                    <input type="text" id="others" name="others">
+                    <label for="other1">其他 1:</label>          
+                    <input type="text" id="other1" name="other1">
+                </div>
+
+                <div class="options">
+                    <label for="other2">其他 2:</label>          
+                    <input type="text" id="other2" name="other2">
+                </div>
+
+                <div class="options">
+                    <label for="other3">其他 3:</label>          
+                    <input type="text" id="other3" name="other3">
                 </div>
 
                 <input type="submit" id="submit" style="border-radius: 10px;">
 
             </form>
 
-            <div style="margin-top: 15px;">紀錄：</div>
+            <div style="margin-top: 15px;">紀錄:</div>
             <div id="records">
                 <a class="record_person" href="/records/Philippe">Philippe</a>
                 <a class="record_person" href="/records/Shanti">Shanti</a>

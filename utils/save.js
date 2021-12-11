@@ -49,6 +49,13 @@ async function saveRecords(nameId, choreIds, date) {
     await DB.query(stmt, [sqlValues])
 }
 
+async function saveRewards(name, date) {
+    const rewards = await calculateRewards(name)
+    const stmt = "INSERT IGNORE INTO rewards (name_id, rewards, date) VALUES ? "
+    const vals = [rewards.nameId, rewards.rewards, date]
+    await DB.query(stmt, vals)
+}
+
 async function calculateRewards(name) {
     const [resultName] = await DB.query("SELECT id FROM names WHERE name = ?", name)
     if (resultName == undefined) return 0
@@ -85,6 +92,7 @@ async function calculateRewards(name) {
     
 
     return {
+        nameId,
         rewards, 
         accumulated: accumulatedArray[accumulatedArray.length -1],
         accumulatedTimes: await utils.getChoreTimes(new Date(), nameId),
@@ -114,7 +122,7 @@ async function getAllRecordsSorted(name) {
         `SELECT records.date, chores.chore FROM records 
         JOIN names ON names.id = records.name_id 
         JOIN chores ON chores.id = records.chore_id 
-        WHERE name_id = ? 
+        WHERE name_id = ? AND datetime > NOW() + INTERVAL - 10 day 
         ORDER BY datetime DESC`, 
         resultName.id,
     )
@@ -150,6 +158,7 @@ async function getAllRecordsSorted(name) {
 module.exports = {
     saveName,
     saveRecords,
+    saveRewards,
     saveChores,
     calculateRewards,
     getTodayRecords,
